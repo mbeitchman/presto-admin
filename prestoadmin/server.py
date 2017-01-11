@@ -554,12 +554,14 @@ def stop():
 def stop_and_start():
     if check_presto_version() != '':
         return False
-    sudo('set -m; ' + INIT_SCRIPTS + ' stop')
-    if is_port_in_use(env.host):
-        return False
-    _LOGGER.info('Executing start on presto server')
-    ret = sudo('set -m; ' + INIT_SCRIPTS + ' start')
-    return ret.succeeded
+    sudo('restart presto-server')     
+    return True
+    #sudo('set -m; ' + INIT_SCRIPTS + ' stop')
+    #if is_port_in_use(env.host):
+    #    return False
+    #_LOGGER.info('Executing start on presto server')
+    #ret = sudo('set -m; ' + INIT_SCRIPTS + ' start')
+    #return ret.succeeded
 
 
 @task
